@@ -199,7 +199,7 @@ bool ApplicationData::LoadManifestData() {
   splash_screen_info_ =
     std::static_pointer_cast<const wgt::parse::SplashScreenInfo>(
       widget_config_parser->GetManifestData(
-        wgt::application_widget_keys::kTizenSplashScreenKey));
+        wgt::application_widget_keys::kSplashScreen));
 
   tizen_application_info_ =
     std::static_pointer_cast<const wgt::parse::TizenApplicationInfo>(
