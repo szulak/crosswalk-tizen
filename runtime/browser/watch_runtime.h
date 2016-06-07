@@ -26,6 +26,8 @@
 #include "runtime/browser/native_window.h"
 #include "runtime/browser/web_application.h"
 
+class Ewk_Context;
+
 namespace runtime {
 
 class WatchRuntime : public Runtime {
@@ -51,6 +53,7 @@ class WatchRuntime : public Runtime {
   WebApplication* application_;
   NativeWindow* native_window_;
   common::ApplicationData* app_data_;
+  Ewk_Context* context_;
 };
 
 }  // namespace runtime

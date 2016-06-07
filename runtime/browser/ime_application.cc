@@ -25,8 +25,9 @@
 namespace runtime {
 
 ImeApplication::ImeApplication(
-    NativeWindow* window, common::ApplicationData* app_data)
-    : WebApplication(window, app_data) {
+    NativeWindow* window, common::ApplicationData* app_data,
+    Ewk_Context* context)
+    : WebApplication(window, app_data, context) {
 }
 
 ImeApplication::~ImeApplication() {

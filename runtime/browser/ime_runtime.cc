@@ -55,7 +55,9 @@ static NativeWindow* CreateNativeWindow() {
 ImeRuntime::ImeRuntime(common::ApplicationData* app_data)
     : application_(NULL),
       native_window_(NULL),
-      app_data_(app_data) {
+      app_data_(app_data),
+      context_(
+          ewk_context_new_with_injected_bundle_path(INJECTED_BUNDLE_PATH)) {
 }
 
 ImeRuntime::~ImeRuntime() {
@@ -65,6 +67,9 @@ ImeRuntime::~ImeRuntime() {
   if (native_window_) {
     delete native_window_;
   }
+  if (context_)
+    ewk_context_delete(context_);
+
 }
 
 static Evas_Object *enter_key_btn = NULL;
@@ -133,7 +138,7 @@ void ImeRuntime::OnCreate() {
   // Init ImeApplication
   native_window_ = CreateNativeWindow();
   STEP_PROFILE_START("ImeApplication Create");
-  application_ = new ImeApplication(native_window_, app_data_);
+  application_ = new ImeApplication(native_window_, app_data_, context_);
   STEP_PROFILE_END("ImeApplication Create");
 
   setlocale(LC_ALL, "");

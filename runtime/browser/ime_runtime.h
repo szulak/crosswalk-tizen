@@ -26,6 +26,8 @@
 #include "runtime/browser/native_window.h"
 #include "runtime/browser/ime_application.h"
 
+class Ewk_Context;
+
 namespace runtime {
 
 class ImeRuntime : public Runtime {
@@ -46,6 +48,7 @@ class ImeRuntime : public Runtime {
   WebApplication* application_;
   NativeWindow* native_window_;
   common::ApplicationData* app_data_;
+  Ewk_Context* context_;
 };
 
 }  // namespace runtime

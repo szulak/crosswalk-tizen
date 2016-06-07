@@ -26,12 +26,15 @@
 #include "runtime/browser/native_window.h"
 #include "runtime/browser/web_application.h"
 
+class Ewk_Context;
+
 namespace runtime {
 
 class ImeApplication : public WebApplication {
  public:
   ImeApplication(
-    NativeWindow* window, common::ApplicationData* app_data);
+    NativeWindow* window, common::ApplicationData* app_data,
+    Ewk_Context* context);
   virtual ~ImeApplication();
  protected:
   virtual void OnLoadFinished(WebView* view);  // override

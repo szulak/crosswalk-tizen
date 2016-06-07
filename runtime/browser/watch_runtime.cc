@@ -52,10 +52,13 @@ static NativeWindow* CreateNativeWindow() {
 
 }  // namespace
 
+
 WatchRuntime::WatchRuntime(common::ApplicationData* app_data)
     : application_(NULL),
       native_window_(NULL),
-      app_data_(app_data) {
+      app_data_(app_data),
+      context_(
+          ewk_context_new_with_injected_bundle_path(INJECTED_BUNDLE_PATH)) {
 }
 
 WatchRuntime::~WatchRuntime() {
@@ -65,6 +68,8 @@ WatchRuntime::~WatchRuntime() {
   if (native_window_) {
     delete native_window_;
   }
+  if (context_)
+    ewk_context_delete(context_);
 }
 
 bool WatchRuntime::OnCreate() {
@@ -84,7 +89,7 @@ bool WatchRuntime::OnCreate() {
   // Init WebApplication
   native_window_ = CreateNativeWindow();
   STEP_PROFILE_START("WebApplication Create");
-  application_ = new WebApplication(native_window_, app_data_);
+  application_ = new WebApplication(native_window_, app_data_, context_);
   STEP_PROFILE_END("WebApplication Create");
   application_->set_terminator([](){ watch_app_exit(); });
 

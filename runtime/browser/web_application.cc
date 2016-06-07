@@ -215,12 +215,13 @@ static bool ProcessWellKnownScheme(const std::string& url) {
 }  // namespace
 
 WebApplication::WebApplication(
-    NativeWindow* window, common::ApplicationData* app_data)
+    NativeWindow* window,
+    common::ApplicationData* app_data,
+    Ewk_Context* context)
     : launched_(false),
       debug_mode_(false),
       verbose_mode_(false),
-      ewk_context_(
-          ewk_context_new_with_injected_bundle_path(INJECTED_BUNDLE_PATH)),
+      ewk_context_(context),
       window_(window),
       appid_(app_data->app_id()),
       app_data_(app_data),
@@ -239,8 +240,6 @@ WebApplication::WebApplication(
 }
 
 WebApplication::~WebApplication() {
-  if (ewk_context_) ewk_context_delete(ewk_context_);
-
   window_->SetContent(NULL);
   auto it = view_stack_.begin();
   for (; it != view_stack_.end(); ++it) {
