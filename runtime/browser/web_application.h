@@ -40,7 +40,8 @@ class SplashScreen;
 class WebApplication : public WebView::EventListener {
  public:
   WebApplication(NativeWindow* window,
-                 common::ApplicationData* app_data);
+                 common::ApplicationData* app_data,
+                 Ewk_Context* context = nullptr);
   virtual ~WebApplication();
 
   void AppControl(std::unique_ptr<common::AppControl> appcontrol);
